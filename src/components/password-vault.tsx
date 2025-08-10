@@ -24,7 +24,8 @@ import {
   MapPin,
   Lock,
   Search,
-  Globe
+  Globe,
+  Settings as SettingsIcon
 } from 'lucide-react';
 import { PasswordEntry, AppSettings } from '@/types';
 import { encryptData, decryptData, generateId, saveToStorage, loadFromStorage } from '@/lib/utils';
@@ -33,9 +34,10 @@ import { useGeolocation } from '@/hooks/useGeolocation';
 interface PasswordVaultProps {
   settings: AppSettings;
   masterPassword: string;
+  onShowSettings: () => void;
 }
 
-export function PasswordVault({ settings, masterPassword }: PasswordVaultProps) {
+export function PasswordVault({ settings, masterPassword, onShowSettings }: PasswordVaultProps) {
   const [passwords, setPasswords] = useState<PasswordEntry[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
@@ -260,10 +262,16 @@ export function PasswordVault({ settings, masterPassword }: PasswordVaultProps) 
               </p>
             </div>
           </div>
-          <Badge variant="secondary" className="bg-green-100 text-green-800">
-            <Shield className="w-3 h-3 mr-1" />
-            Zone: Trusted
-          </Badge>
+          <div className="flex items-center space-x-2">
+            <Badge variant="secondary" className="bg-green-100 text-green-800">
+              <Shield className="w-3 h-3 mr-1" />
+              Zone: Trusted
+            </Badge>
+            <Button variant="outline" onClick={onShowSettings}>
+              <SettingsIcon className="w-4 h-4 mr-2" />
+              Settings
+            </Button>
+          </div>
         </div>
 
         {/* Search and Add */}

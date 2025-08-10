@@ -77,7 +77,28 @@
    - Password vault unlocks
    - Full functionality restored
 
-### 4. Security Architecture Explanation
+### 4. Settings & Location Management Demo
+
+**Scenario**: "Now let's explore the advanced location management features."
+
+1. **Settings Navigation**
+   - Click the Settings button in the vault header
+   - Show the comprehensive settings interface
+   - Demonstrate logout functionality
+
+2. **Manual Location Addition**
+   - Show the "Add Location" dialog
+   - Demonstrate two methods: Current Location and Manual Entry
+   - Enter coordinates manually (e.g., "40.7128, -74.0060" for NYC)
+   - Explain use case: "Perfect for adding your work location when you're at home"
+
+3. **Location Management**
+   - Edit existing locations
+   - Adjust radius settings
+   - Delete unwanted locations
+   - View distance from current location
+
+### 5. Security Architecture Explanation
 
 **Scenario**: "Let's talk about what makes this truly secure."
 

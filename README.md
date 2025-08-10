@@ -19,6 +19,14 @@ A Next.js-based password manager that uses geofencing technology to secure acces
 - **Website Integration**: Store website URLs with password entries
 - **Notes Support**: Add additional notes to password entries
 
+### Location Management
+- **Current Location Detection**: Automatically detect and add your current location
+- **Manual Coordinate Entry**: Add trusted locations by entering GPS coordinates
+- **Multiple Trusted Zones**: Support for home, office, and other locations
+- **Location Editing**: Modify existing trusted locations and their radius
+- **Distance Display**: See how far you are from each trusted location
+- **Smart Icons**: Automatic icon assignment based on location names
+
 ### User Experience
 - **Modern UI**: Built with shadcn/ui and Tailwind CSS
 - **Responsive Design**: Works on desktop and mobile devices

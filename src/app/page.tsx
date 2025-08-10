@@ -6,14 +6,19 @@ import { loadFromStorage } from '@/lib/utils';
 import { Setup } from '@/components/setup';
 import { Login } from '@/components/login';
 import { PasswordVault } from '@/components/password-vault';
+import { Settings } from '@/components/settings';
+import { useGeolocation } from '@/hooks/useGeolocation';
 
-type AppState = 'setup' | 'login' | 'vault';
+type AppState = 'setup' | 'login' | 'vault' | 'settings';
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>('setup');
   const [settings, setSettings] = useState<AppSettings | null>(null);
   const [masterPassword, setMasterPassword] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
+
+  // Get current location for settings page
+  const { currentLocation } = useGeolocation(settings?.trustedLocations || []);
 
   useEffect(() => {
     // Check if the app is already set up
@@ -35,6 +40,23 @@ export default function Home() {
   const handleLoginSuccess = (password: string) => {
     setMasterPassword(password);
     setAppState('vault');
+  };
+
+  const handleShowSettings = () => {
+    setAppState('settings');
+  };
+
+  const handleBackToVault = () => {
+    setAppState('vault');
+  };
+
+  const handleSettingsUpdate = (newSettings: AppSettings) => {
+    setSettings(newSettings);
+  };
+
+  const handleLogout = () => {
+    setMasterPassword('');
+    setAppState('login');
   };
 
   if (isLoading) {
@@ -59,7 +81,22 @@ export default function Home() {
     
     case 'vault':
       return settings ? (
-        <PasswordVault settings={settings} masterPassword={masterPassword} />
+        <PasswordVault 
+          settings={settings} 
+          masterPassword={masterPassword} 
+          onShowSettings={handleShowSettings}
+        />
+      ) : null;
+    
+    case 'settings':
+      return settings ? (
+        <Settings 
+          settings={settings}
+          onSettingsUpdate={handleSettingsUpdate}
+          onLogout={handleLogout}
+          onBackToVault={handleBackToVault}
+          currentLocation={currentLocation}
+        />
       ) : null;
     
     default:
